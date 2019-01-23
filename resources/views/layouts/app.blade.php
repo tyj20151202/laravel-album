@@ -53,11 +53,3 @@
     @yield('script')
 </body>
 </html>                                            
-~                                                                     
-~                                                                     
-~                                                                     
-~                                                           
-~                                                                     
-~                                                                     
-~                                                                     
-~           
