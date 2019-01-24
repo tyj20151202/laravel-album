@@ -5730,4 +5730,23 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.album a:hover {
+  text-decoration: none;
+  display: block;
+  box-shadow: 1px 1px 5px 1px #848484; }
+
+.album .album-name {
+  color: black;
+  font-size: 16px;
+  margin: 10px 0 0; }
+
+.album .album-intro {
+  color: gray;
+  font-size: 12px;
+  margin: 10px 0 0;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 /*# sourceMappingURL=app.css.map */

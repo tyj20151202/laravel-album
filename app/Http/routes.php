@@ -13,3 +13,7 @@
 
 Route::get('/', 'StaticPagesController@home')->name('home');
 
+Route::resource('albums','AlbumsController');
+
+Route::resource('photos','PhotosController');
+
