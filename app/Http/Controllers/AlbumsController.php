@@ -26,4 +26,27 @@ class AlbumsController extends Controller
         session()->flash('success','create successful');
         return back();
     }
+
+    public function show($id){
+
+        $album = Album::findOrFail($id);
+
+        return view('albums.show', compact('album'));
+    }
+
+    public function update(Request $request, $id){
+
+        $this->validate($request,[
+            'name' => 'required|max:50',
+        ]);
+
+        $album = Album::findOrFail($id);
+        $album->update([
+            'name' => $request->name,
+            'intro' => $request->intro,
+        ]);
+
+        session()->flash('success','Edit successful');
+        return back();
+    }
 }
