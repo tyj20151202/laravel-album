@@ -17,22 +17,50 @@
         <h2>{{ $album->name }}</h2>
         <p>{{ $album->intro }}</p>
 
-        <!-- ?????????? -->
-        <button type="button" class="btn btn-primary">
+        <!-- Upload Photo button -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadPhoto">
           Upload Photo
         </button>
-        <!-- ?????????? -->
+        <!-- Edit Album button -->
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editAlbum">
           Edit Album
         </button>
-        <!-- ?????????? -->
+        <!-- Delete Album button -->
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAlbum">
           Delete Album
         </button>
     </div>
 </div>
 
-<!-- ???????? -->
+<!-- Upload Photo Modal -->
+<div class="modal fade" id="uploadPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Photo</h4>
+      </div>
+      <div class="modal-body">
+          <form action="{{ route('photos.store') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <input type="hidden" name="album_id" value="{{ $album->id }}">
+            <div class="form-group">
+              <input type="file" name="photo" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="Click here to add a title for this photo">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="intro" placeholder="Click here to add an introduction for this photo">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Album Modal -->
 <div class="modal fade" id="editAlbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -62,7 +90,6 @@
                   <input type="file" name="cover">
                 </div>
             </div>
-            <!-- ???????? -->
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
@@ -75,7 +102,7 @@
   </div>
 </div>
 
-<!-- ???? -->
+<!-- Delete Album Modal -->
 <div class="modal fade" id="deleteAlbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content" style="text-align:center">
@@ -87,7 +114,7 @@
           <form action="{{ route('albums.destroy', $album->id) }}" method="post" style="display: inline-block;">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
-            <button type="submit" class="btn btn-danger">Dlete</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
           </form>
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
       </div>
@@ -95,6 +122,10 @@
   </div>
 </div>
 
+<hr>
+<div class="row">
+  @include('shared.photo')
+</div>
 
 
 @endsection

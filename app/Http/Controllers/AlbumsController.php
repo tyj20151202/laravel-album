@@ -20,9 +20,9 @@ class AlbumsController extends Controller
         ]);
 
         $album = Album::create([
-	    'name' => $request->name,
-	    'intro' => $request->intro,
-	    'password' => $request->password,
+	       'name' => $request->name,
+	       'intro' => $request->intro,
+	       'password' => $request->password,
         ]);
 
         session()->flash('success','create successful');
