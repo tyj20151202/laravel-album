@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Album;
 
+use Image;
+
 class AlbumsController extends Controller
 {
     public function store(Request $request){
@@ -45,6 +47,14 @@ class AlbumsController extends Controller
             'name' => $request->name,
             'intro' => $request->intro,
         ]);
+
+        if($request->hasFile('cover')){
+            $cover_path = "img/album/covers/" . time() . ".jpg";
+            Image::make($request->cover)->resize(355,200)->save(public_path($cover_path));
+            $album->update([
+                'cover' => "/" . $cover_path,
+            ]);
+        }
 
         session()->flash('success','Edit successful');
         return back();
